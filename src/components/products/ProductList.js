@@ -7,6 +7,10 @@ export default function ProductList({ searchTerm, selectedCategory }) {
     const [loading, setLoading] = useState(true)
     const [error, setError] = useState(null)
 
+    useEffect(() => {
+        document.title = "Product Catalog";
+    }, []);
+
     const fetchProducts = async () => {
         try {
             setLoading(true)
@@ -89,22 +93,24 @@ export default function ProductList({ searchTerm, selectedCategory }) {
 
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-6">
                 {products.map((product) => (
-                <div key={product.id} className="h-full flex flex-col">
-                    <div className="relative bg-gradient-to-br from-gray-50 to-gray-100 p-3 rounded-lg">
-                        <img 
-                        src={product.image} 
-                        alt={product.title}
-                        className="w-full h-48 object-contain mix-blend-multiply"
-                        />
+                <Link key={product.id} href={`/products/${product.id}`} className="block">
+                    <div className="h-full flex flex-col">
+                        <div className="relative bg-gradient-to-br from-gray-50 to-gray-100 p-3 rounded-lg">
+                            <img 
+                            src={product.image} 
+                            alt={product.title}
+                            className="w-full h-48 object-contain mix-blend-multiply"
+                            />
 
-                        <div className="absolute inset-0 bg-white/5"></div>
+                            <div className="absolute inset-0 bg-white/5"></div>
+                        </div>
+                        <div className="py-4">
+                            <h3 className="text-gray-200 text-lg mb-2 line-clamp-2">{product.title}</h3>
+                            <p className="text-gray-400 text-sm mb-2 capitalize">{product.category}</p>
+                            <p className="text-gray-400 text-xl">${product.price}</p>
+                        </div>
                     </div>
-                    <div className="py-4">
-                        <h3 className="text-gray-200 text-lg mb-2 line-clamp-2">{product.title}</h3>
-                        <p className="text-gray-400 text-sm mb-2 capitalize">{product.category}</p>
-                        <p className="text-gray-400 text-xl">${product.price}</p>
-                    </div>
-                </div>
+                </Link>
                 ))}
             </div>
         </div>
