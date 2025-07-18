@@ -9,6 +9,7 @@ const useWishlist = () => {
 
     // Load wishlist from localStorage on mount
     useEffect(() => {
+      setIsLoading(true);
         try {
             const savedWishlist = localStorage.getItem('wishlist');
             if (savedWishlist) {
@@ -19,11 +20,13 @@ const useWishlist = () => {
             setError('Failed to load wishlist');
         } finally {
             setIsInitialized(true);
+            setIsLoading(false);
         }
     }, []);
 
     // Save wishlist to localStorage whenever it changes
     useEffect(() => {
+      setIsLoading(true);
       if (!isInitialized) {
             console.log('⏸️ Skipping save - not initialized yet');
             return; // Skip saving during initialization
@@ -34,6 +37,8 @@ const useWishlist = () => {
         } catch (error) {
             console.error('Error saving wishlist to localStorage:', error);
             setError('Failed to save wishlist');
+        } finally {
+          setIsLoading(false);
         }
     }, [wishlistItems, isInitialized]);
 
@@ -90,7 +95,10 @@ const useWishlist = () => {
                 prevItems.filter(item => item.id !== productId)
             );
 
-            localStorage.setItem('wishlist', JSON.stringify(wishlistItems));
+            const wishlist = localStorage.getItem('wishlist');
+            const array = JSON.parse(wishlist);
+            const filtered = array.filter(item => item.id !== productId);
+            localStorage.setItem('wishlist', JSON.stringify(filtered));
 
             console.log('Product removed from wishlist');
             
