@@ -3,7 +3,7 @@ import { useState, useEffect, useMemo } from 'react'
 
 export default function useProductSearch() {
   const [searchTerm, setSearchTerm] = useState('')
-  const [selectedCategory, setSelectedCategory] = useState('all')
+  const [selectedCategory, setSelectedCategory] = useState('')
   const [products, setProducts] = useState([])
   const [categories, setcategories] = useState([])
   const [loading, setLoading] = useState(true)
@@ -53,7 +53,7 @@ export default function useProductSearch() {
 
   // Filter products berdasarkan search term
   const filteredProducts = useMemo(() => {
-    if (!searchTerm.trim() && selectedCategory == 'all') {
+    if (!searchTerm.trim() && selectedCategory == '') {
       return products
     }
 
@@ -89,10 +89,10 @@ export default function useProductSearch() {
 
   const clearSearch = () => {
     setSearchTerm('')
-    setSelectedCategory('all')
+    setSelectedCategory('')
   }
 
-    const hasActiveFilters = searchTerm || selectedCategory !== 'all'
+    const hasActiveFilters = searchTerm || selectedCategory !== ''
 
   return {
     searchTerm,
