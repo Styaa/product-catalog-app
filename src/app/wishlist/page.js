@@ -27,9 +27,9 @@ export default function WishlistPage() {
         if (!productToDelete) return;
         
         setDeletingId(productToDelete.id);
-
+        
         try {
-            await removeFromWishlist(1);
+            await removeFromWishlist(productToDelete.id);
             console.log('Product removed from wishlist');
         } catch (error) {
             console.error('Error removing from wishlist:', error);

@@ -90,6 +90,8 @@ const useWishlist = () => {
                 prevItems.filter(item => item.id !== productId)
             );
 
+            localStorage.setItem('wishlist', JSON.stringify(wishlistItems));
+
             console.log('Product removed from wishlist');
             
         } catch (error) {
