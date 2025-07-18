@@ -18,7 +18,7 @@ export default function WishlistPage() {
     const handleDeleteClick = (e, product) => {
         e.preventDefault();
         e.stopPropagation();
-        
+
         setProductToDelete(product);
         setShowDeleteModal(true);
     };
@@ -27,7 +27,6 @@ export default function WishlistPage() {
         if (!productToDelete) return;
         
         setDeletingId(productToDelete.id);
-        setShowDeleteModal(false);
         
         try {
             await removeFromWishlist(productToDelete.id);
