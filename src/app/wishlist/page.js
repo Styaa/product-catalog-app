@@ -54,17 +54,6 @@ export default function WishlistPage() {
         )
     }
 
-    if (wishlistItems.length === 0) {
-        return (
-        <div className="text-center py-8">
-            <div className="bg-gray-50 border border-gray-200 rounded-lg p-6">
-            <h3 className="text-gray-800 font-medium mb-2">No Products Found</h3>
-            <p className="text-gray-600">Please try again later</p>
-            </div>
-        </div>
-        )
-    }
-
   return (
     <div className="min-h-screen bg-[#171b24]">
       <Navbar/>
@@ -119,24 +108,21 @@ export default function WishlistPage() {
                     </div>
                 ))}
 
-                {/* Empty State */}
-                {wishlistItems.length === 0 && (
-                    <div className="text-center py-16">
-                        <div className="bg-gray-800 rounded-full w-24 h-24 flex items-center justify-center mx-auto mb-6">
-                            <svg className="w-12 h-12 text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" />
-                            </svg>
-                        </div>
-                        <h2 className="text-2xl font-bold text-white mb-4">Wishlist Kosong</h2>
-                        <p className="text-gray-400 mb-8">Mulai tambahkan produk yang Anda sukai ke wishlist</p>
-                        <Link 
-                            href="/products"
-                            className="bg-blue-500 hover:bg-blue-600 text-white px-6 py-3 rounded-lg inline-block transition-colors"
-                        >
-                            Jelajahi Produk
-                        </Link>
-                    </div>
-                )}
+                {wishlistItems == 0 && <div className="text-center py-16">
+                                    <div className="bg-gray-800 rounded-full w-24 h-24 flex items-center justify-center mx-auto mb-6">
+                                        <svg className="w-12 h-12 text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" />
+                                        </svg>
+                                    </div>
+                                    <h2 className="text-2xl font-bold text-white mb-4">Wishlist Kosong</h2>
+                                    <p className="text-gray-400 mb-8">Mulai tambahkan produk yang Anda sukai ke wishlist</p>
+                                    <Link 
+                                        href="/"
+                                        className="bg-blue-500 hover:bg-blue-600 text-white px-6 py-3 rounded-lg inline-block transition-colors"
+                                    >
+                                        Jelajahi Produk
+                                    </Link>
+                                </div>}
 
                 {/* Delete Confirmation Modal */}
                 {showDeleteModal && productToDelete && (
